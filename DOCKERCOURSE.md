@@ -69,3 +69,19 @@
 #### internal option
   - internal option is used to make the container to access this internal network containers but not access other networks or internet
   - ``` docker network create --internal <network name> ```
+
+## Storage
+ - containers is stateless
+ - container's storage is live as long as container's life, but if we killed container then storage or data on will be removed.
+
+ #### there are two ways to save data even if container were removed
+
+   1. **Mount:**
+     - to save data on directory by creating mount
+      ``` docker run --name <container name> -v <path/to/mount/directory>:<path/on/the> <container image_name> ```
+   2. **Volume:**
+      - to create volume
+        ``` docker volume create <volume name>```
+      - to use that volume
+      ``` docker run --name <container name> -v myvol:<path/on/the> <container image_name> ```
+        
