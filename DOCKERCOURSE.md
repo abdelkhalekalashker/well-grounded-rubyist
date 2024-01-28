@@ -84,4 +84,31 @@
         ``` docker volume create <volume name>```
       - to use that volume
       ``` docker run --name <container name> -v myvol:<path/on/the> <container image_name> ```
-        
+
+
+## Dockerfile
+
+  docker file is some thing like this file :-
+  ``` 
+      FROM ruby:3.1.2
+      RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+      
+      WORKDIR /myapp
+      COPY Gemfile /myapp/Gemfile
+      COPY Gemfile.lock /myapp/Gemfile.lock
+      RUN bundle install
+      COPY Gemfile /myapp/Gemfile
+      ENTRYPOINT ["entrypoint.sh"]
+      CMD ["rails", "server", "-b", "0.0.0.0"]
+  ```
+
+  - `` From `` is used to pull the main image to run the application
+  - `` WORKDIR `` is used to specify the work directory to work in and to be used after running any command to run in that directory
+  - `` COPY `` is used to copy file from directory into directory of image or container
+  - `` ENTRYPOINT `` is used to specify the main process inthe container from the image in run time
+  - `` CMD `` is used to run command in its arguments in main process of container (entrypoint), and can accept shell script to run more than one command.
+  
+  
+  - to build the Dockerfile we run command
+  ``` docker build -t <name to be used> . ``` --> (.) in command is used to run the dockerfile from current directory
+  
